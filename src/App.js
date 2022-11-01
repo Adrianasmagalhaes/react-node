@@ -1,19 +1,30 @@
 import "./App.css";
 import React, { useState, useEffect } from "react";
+import axios from 'axios'
 
 function App() {
   const [books, setBooks] = useState([]);
-  useEffect(() => {
-    fetch("https://books.ronier.me")
-      .then((response) => response.json())
-      .then((data) => setBooks(data.content));
-  }, []);
+  // useEffect(() => {
+  //   fetch("/books")
+  //     .then((response) => response.json())
+  //     .then(data => {
+  //       console.log('data',data)
+  //       setBooks(data)
+  //     })
+  //     // .then((data) => setBooks(data.content));
+  // }, []);
+  useEffect(()=>{
+    axios.get('/books')
+    .then((response)=> console.log(response.data))
+
+  }, [])
   return (
     <div className="App">
-      <table border="1">
+
+      {/* <table border="1">
         <thead>
-          <td>Titulo</td>
-          <td>Autor</td>
+          <th>Titulo</th>
+          <th>Autor</th>
         </thead>
         <tbody>
           {books.map((book) => (
@@ -23,7 +34,8 @@ function App() {
             </tr>
           ))}
         </tbody>
-      </table>
+      </table> */}
+      {JSON.stringify(books)}
     </div>
   );
 }
